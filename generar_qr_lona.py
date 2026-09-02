@@ -1,39 +1,110 @@
 from pathlib import Path
+
 import qrcode
 from qrcode.constants import ERROR_CORRECT_H
 from qrcode.image.svg import SvgPathImage
 
-# Cambia esta URL UNA SOLA VEZ después de publicar este proyecto en Vercel.
-# Después de imprimir las lonas, NO cambies esta URL.
-URL_QR = "https://qr-tpbv.vercel.app/"
 
-salida = Path("qr_generado")
-salida.mkdir(parents=True, exist_ok=True)
+# ============================================================
+# URL REAL DEL CARRUSEL
+# ============================================================
 
-png_path = salida / "QR_TPBV_LONA.png"
-svg_path = salida / "QR_TPBV_LONA.svg"
+URL_QR = "https://carrucel-tpbv.vercel.app/"
+
+
+# ============================================================
+# CARPETA DONDE SE GUARDARÁ EL QR
+# ============================================================
+
+carpeta_salida = Path("qr_generado")
+
+carpeta_salida.mkdir(
+    parents=True,
+    exist_ok=True
+)
+
+
+# ============================================================
+# ARCHIVOS DE SALIDA
+# ============================================================
+
+archivo_png = carpeta_salida / "QR_TPBV_LONA.png"
+archivo_svg = carpeta_salida / "QR_TPBV_LONA.svg"
+
+
+# ============================================================
+# CONFIGURACIÓN DEL QR
+# ============================================================
 
 qr = qrcode.QRCode(
+
+    # Tamaño automático
     version=None,
+
+    # Corrección de errores alta
+    # Recomendable para impresión en lona
     error_correction=ERROR_CORRECT_H,
+
+    # Resolución del PNG
     box_size=32,
-    border=4,
+
+    # Margen blanco
+    border=4
 )
+
+
+# Agregar URL al QR
 qr.add_data(URL_QR)
+
+# Crear QR
 qr.make(fit=True)
 
-img_png = qr.make_image(fill_color="black", back_color="white")
-img_png.save(png_path)
 
-img_svg = qr.make_image(image_factory=SvgPathImage)
-img_svg.save(svg_path)
+# ============================================================
+# GENERAR PNG
+# ============================================================
+
+imagen_png = qr.make_image(
+    fill_color="black",
+    back_color="white"
+)
+
+imagen_png.save(archivo_png)
+
+
+# ============================================================
+# GENERAR SVG
+# ============================================================
+
+imagen_svg = qr.make_image(
+    image_factory=SvgPathImage
+)
+
+imagen_svg.save(archivo_svg)
+
+
+# ============================================================
+# RESULTADO
+# ============================================================
 
 print("")
-print("======================================")
-print(" QR TPBV GENERADO CORRECTAMENTE")
-print("======================================")
-print("URL fija:", URL_QR)
-print("PNG:", png_path.resolve())
-print("SVG:", svg_path.resolve())
+print("================================================")
+print("       QR TPBV GENERADO CORRECTAMENTE")
+print("================================================")
 print("")
-print("Para lona utiliza preferentemente el archivo SVG.")
+
+print("URL incluida en el QR:")
+print(URL_QR)
+
+print("")
+print("PNG:")
+print(archivo_png.resolve())
+
+print("")
+print("SVG:")
+print(archivo_svg.resolve())
+
+print("")
+print("IMPORTANTE:")
+print("Para impresión en lona utiliza preferentemente el SVG.")
+print("")
