@@ -1,64 +1,58 @@
-QR TPBV - PROYECTO DE REDIRECCION
-====================================
+QR TPBV - REDIRECCION V2 CORREGIDA
+=====================================
 
 OBJETIVO
 --------
-Este proyecto existe únicamente para que el QR impreso en las lonas nunca tenga que cambiar.
-
-FLUJO
------
-QR impreso
-  -> URL fija de este proyecto Vercel
-  -> destino configurado en vercel.json
+El QR de la lona apunta SIEMPRE a la URL estable de este mini proyecto en Vercel.
+El destino final se puede cambiar cuando quieras SIN volver a generar ni imprimir el QR.
 
 DESTINO ACTUAL
 --------------
 https://carrucel-tpbv.vercel.app/carrusel
 
-COMO CAMBIAR EL DESTINO EN EL FUTURO
-------------------------------------
-Abre vercel.json y cambia SOLO el valor de "destination".
+PRIMERA VEZ - GENERAR EL QR
+---------------------------
+1. Confirma que este mini proyecto ya está publicado en Vercel.
+2. Copia SU URL pública (la del mini proyecto redirector).
+3. Instala qrcode si hace falta:
+   python -m pip install "qrcode[pil]"
+4. Ejecuta:
+   python generar_qr_lona.py
+5. El script te pedirá la URL del proyecto redirector.
+6. Se crearán:
+   qr_generado/QR_TPBV_LONA.png
+   qr_generado/QR_TPBV_LONA.svg
+   qr_generado/URL_FIJA_DEL_QR.txt
 
-Ejemplo actual:
-"destination": "https://carrucel-tpbv.vercel.app/carrusel"
+PARA CAMBIAR EL DESTINO DESPUÉS
+-------------------------------
+NO ejecutes generar_qr_lona.py otra vez.
+NO cambies la lona.
 
-Ejemplo futuro:
-"destination": "https://otro-proyecto.vercel.app/"
+Ejecuta:
+   python cambiar_destino.py
+
+Pega el nuevo destino, por ejemplo:
+   https://nuevo-dominio.morelos.gob.mx/
 
 Después:
-git add -A
-git commit -m "Cambiar destino QR"
-git push
-
-El QR impreso NO cambia.
-
-PRIMERA PUBLICACION
--------------------
-1. Descomprime este proyecto.
-2. Abre PowerShell dentro de la carpeta.
-3. Si quieres usar Git:
-   git init
    git add -A
-   git commit -m "Proyecto inicial QR TPBV"
+   git commit -m "Actualizar destino del QR"
+   git push
 
-4. Publica en Vercel:
-   npx vercel
+Vercel desplegará el cambio y EL MISMO QR abrirá el nuevo destino.
 
-5. Cuando Vercel te dé la URL definitiva, por ejemplo:
-   https://qr-tpbv.vercel.app/
+PRUEBA RÁPIDA
+-------------
+Puedes probar hoy cambiando temporalmente el destino a otra URL pública con:
+   python cambiar_destino.py
 
-6. Abre generar_qr_lona.py y coloca ESA URL en:
-   URL_QR = "https://qr-tpbv.vercel.app/"
+Sube el cambio con git push y escanea EL MISMO QR.
 
-7. Instala la librería QR si hace falta:
-   python -m pip install "qrcode[pil]"
-
-8. Genera el QR:
-   python generar_qr_lona.py
-
-9. Prueba el QR con varios celulares antes de mandar a imprimir.
+Cuando termines la prueba, ejecuta otra vez cambiar_destino.py y vuelve a:
+   https://carrucel-tpbv.vercel.app/carrusel
 
 IMPORTANTE
 ----------
-No imprimas el QR hasta confirmar cuál será la URL definitiva del nuevo proyecto en Vercel.
-Una vez impreso, conserva esa URL del proyecto.
+La URL que queda impresa dentro del QR debe ser la URL estable DEL MINI PROYECTO REDIRECTOR,
+no la URL final del carrusel.

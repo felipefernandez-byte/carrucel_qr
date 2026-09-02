@@ -3,12 +3,12 @@
   "redirects": [
     {
       "source": "/",
-      "destination": "https://carrucel-tpbv.vercel.app/carrusel",
+      "destination": "https://memolugo.github.io/TPBV-2026/dashboard/TPBV_2026_COMPLETO_PRO.html",
       "permanent": false
     },
     {
       "source": "/qr",
-      "destination": "https://carrucel-tpbv.vercel.app/carrusel",
+      "destination": "https://memolugo.github.io/TPBV-2026/dashboard/TPBV_2026_COMPLETO_PRO.html",
       "permanent": false
     }
   ]
