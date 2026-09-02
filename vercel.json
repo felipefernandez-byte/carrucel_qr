@@ -1,0 +1,15 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://carrucel-tpbv.vercel.app/carrusel",
+      "permanent": false
+    },
+    {
+      "source": "/qr",
+      "destination": "https://carrucel-tpbv.vercel.app/carrusel",
+      "permanent": false
+    }
+  ]
+}
